@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libmicrohttpd
-PKG_VERSION:=0.9.38
-PKG_RELEASE:=1.2
+PKG_VERSION:=0.9.44
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GNU/libmicrohttpd
-PKG_MD5SUM:=b72efbfe7f290846015d460aea7091fe
+PKG_MD5SUM:=9101b5ebf8f71792938ae672da314da2
 
 PKG_MAINTAINER:=Martijn Zilverschoon <martijn@friedzombie.com>
 
@@ -29,13 +29,20 @@ define Package/libmicrohttpd
 	CATEGORY:=Libraries
 	TITLE:=GNU libmicrohttpd is a library that runs an HTTP server.
 	URL:=http://www.gnu.org/software/libmicrohttpd/
-	DEPENDS:=+libpthread +libgcrypt +libgnutls +libgpg-error +libopenssl
+	DEPENDS:=+libpthread +libgcrypt +libgnutls +libgpg-error
 endef
 
 define Package/libmicrohttpd/description
 	GNU libmicrohttpd is a small C library that is supposed to make it easy
 	to run an HTTP server as part of another application.
 endef
+
+CONFIGURE_ARGS += \
+	--enable-https \
+	--with-gnutls \
+	--disable-curl \
+	--disable-spdy \
+	--without-openssl
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/

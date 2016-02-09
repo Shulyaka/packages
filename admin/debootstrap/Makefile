@@ -9,13 +9,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=debootstrap
-PKG_VERSION:=1.0.67
+PKG_VERSION:=1.0.75
 PKG_RELEASE:=1
 PKG_MAINTAINER=Daniel Golle <daniel@makrotopia.org>
 
 PKG_SOURCE:=$(PKG_NAME)-udeb_$(PKG_VERSION)_all.udeb
 PKG_SOURCE_URL:=http://ftp.debian.org/debian/pool/main/d/debootstrap
-PKG_MD5SUM:=e7854d4b10ab860f08921525406debdd
+PKG_MD5SUM:=5b568d66390d76fba87b839984254730
 PKG_LICENSE:=Unique
 PKG_LICENSE_FILES:=debian/copyright
 

@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fwknop
-PKG_VERSION:=2.6.6
-PKG_RELEASE:=2
+PKG_VERSION:=2.6.8
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=http://www.cipherdyne.org/fwknop/download
-PKG_MD5SUM:=1372aeaf1e33ab1d6b9906ef9b5cd02e
+PKG_MD5SUM:=1259adc5cff5e29006e4c3ce9f9b2711
 PKG_MAINTAINER:=Jonathan Bennett <JBennett@incomsystems.biz>
 PKG_LICENSE:=GPLv2
 PKG_INSTALL:=1
@@ -87,7 +87,7 @@ define Package/libfko/description
 endef
 
 
-ifeq ($(CONFIG_FWKNOPD_GPG),n)
+ifneq ($(CONFIG_FWKNOPD_GPG),y)
 	CONFIGURE_ARGS += --without-gpgme 
 endif
 
