@@ -1,33 +1,33 @@
-#
-# Copyright (C) 2011-2015 Entware
+# Copyright (C) 2006-2010 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
 
-include $(TOPDIR)/rules.mk
 
+include $(TOPDIR)/rules.mk
+PKG_USE_MIPS16:=0 
 PKG_NAME:=i2pd
-PKG_VERSION:=0.10.0
-PKG_REV:=5f644b1b04d87ae52cd701a6d2c9bd0737547fd7
+PKG_VERSION:=2.3.0
+PKG_REV:=f31c04d92a55ce4d4140c4b6d330802b4ace7e3f
 PKG_RELEASE:=1
+PKG_BUILD_PARALLEL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/orignal/i2pd
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=$(PKG_REV)
-PKG_USE_MIPS16:=0
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/i2pd
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS:=+libcryptoxx +boost-filesystem +boost-regex +boost-program_options +boost-date_time +libatomic
+	DEPENDS:=+libopenssl +boost_system +boost-filesystem +boost-regex +boost-program_options +boost-date_time +libatomic
 	TITLE:=simplified C++ implementation of I2P client
 	URL:=$(PKG_SOURCE_URL)
-	MAINTAINER:=Entware team, entware.wl500g.info
+	MAINTAINER:=Denis Shulyaka
 endef
 
 define Package/i2pd/description
@@ -43,16 +43,18 @@ define Build/Prepare
 endef
 
 define Package/i2pd/conffiles
-/opt/etc/i2p.conf
+/etc/i2p.conf
 endef
 
 define Package/i2pd/install
-	$(INSTALL_DIR) $(1)/opt/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/i2p $(1)/opt/bin
-	$(INSTALL_DIR) $(1)/opt/etc/init.d
-	$(INSTALL_CONF) ./files/i2p.conf $(1)/opt/etc
-	$(INSTALL_BIN) ./files/S30i2p $(1)/opt/etc/init.d
-	$(INSTALL_DIR) $(1)/opt/var/lib
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/i2pd $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/libi2pd.a $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/libi2pdclient.a $(1)/usr/bin
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_CONF) ./files/i2p.conf $(1)/etc
+	$(INSTALL_BIN) ./files/S30i2p $(1)/etc/init.d
+	$(INSTALL_DIR) $(1)/usr/lib
 endef
 
 $(eval $(call BuildPackage,i2pd))
