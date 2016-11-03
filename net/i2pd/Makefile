@@ -8,8 +8,8 @@
 include $(TOPDIR)/rules.mk
 PKG_USE_MIPS16:=0 
 PKG_NAME:=i2pd
-PKG_VERSION:=2.3.0
-PKG_REV:=f31c04d92a55ce4d4140c4b6d330802b4ace7e3f
+PKG_VERSION:=2.10.0
+PKG_REV:=3643d6b5d5077f6c81120b23b8fc404264b9dbc9
 PKG_RELEASE:=1
 PKG_BUILD_PARALLEL:=1
 
@@ -24,7 +24,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/i2pd
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS:=+libopenssl +boost_system +boost-filesystem +boost-regex +boost-program_options +boost-date_time +libatomic
+	DEPENDS:=+libopenssl +boost-system +boost-filesystem +boost-regex +boost-program_options +boost-date_time +libatomic
 	TITLE:=simplified C++ implementation of I2P client
 	URL:=$(PKG_SOURCE_URL)
 	MAINTAINER:=Denis Shulyaka
