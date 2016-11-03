@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ENABLED=yes
+PROCS=i2pd
+ARGS="--conf=/etc/i2p.conf"
+PREARGS=""
+DESC=$PROCS
+
+. /etc/init.d/rc.func
