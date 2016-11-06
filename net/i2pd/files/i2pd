@@ -1,0 +1,17 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2016 OpenWrt.org
+
+START=50
+STOP=50
+
+USE_PROCD=1
+
+start_service() {
+	[ -f /var/run/i2pd.pid ] || {
+		touch /var/run/i2pd.pid
+		chown tor:tor /var/run/i2pd.pid
+	}
+	procd_open_instance
+	procd_set_param command /usr/bin/i2pd --conf=/etc/i2p.conf
+	procd_close_instance
+}

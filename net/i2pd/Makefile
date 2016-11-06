@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 PKG_USE_MIPS16:=0 
 PKG_NAME:=i2pd
 PKG_VERSION:=2.10.0
-PKG_REV:=3643d6b5d5077f6c81120b23b8fc404264b9dbc9
+PKG_REV:=6ee227675a4d0e694ee363055ef0a5ee84208bee
 PKG_RELEASE:=1
 PKG_BUILD_PARALLEL:=1
 
@@ -19,12 +19,14 @@ PKG_SOURCE_URL:=https://github.com/orignal/i2pd
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=$(PKG_REV)
 
+TARGET_LDFLAGS += -latomic
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/i2pd
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS:=+libopenssl +boost-system +boost-filesystem +boost-regex +boost-program_options +boost-date_time +libatomic
+	DEPENDS:=+libopenssl +boost-system +boost-filesystem +boost-regex +boost-program_options +boost-date_time +zlib +libatomic
 	TITLE:=simplified C++ implementation of I2P client
 	URL:=$(PKG_SOURCE_URL)
 	MAINTAINER:=Denis Shulyaka
@@ -53,7 +55,7 @@ define Package/i2pd/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/libi2pdclient.a $(1)/usr/bin
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_CONF) ./files/i2p.conf $(1)/etc
-	$(INSTALL_BIN) ./files/S30i2p $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/i2pd $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/usr/lib
 endef
 
