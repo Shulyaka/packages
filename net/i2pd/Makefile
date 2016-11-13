@@ -45,7 +45,7 @@ define Build/Prepare
 endef
 
 define Package/i2pd/conffiles
-/etc/i2p.conf
+/etc/i2pd.conf
 endef
 
 define Package/i2pd/install
@@ -54,7 +54,7 @@ define Package/i2pd/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/libi2pd.a $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/libi2pdclient.a $(1)/usr/bin
 	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_CONF) ./files/i2p.conf $(1)/etc
+	$(INSTALL_CONF) ./files/i2pd.conf $(1)/etc
 	$(INSTALL_BIN) ./files/i2pd $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/usr/lib
 endef
