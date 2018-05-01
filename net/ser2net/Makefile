@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ser2net
-PKG_VERSION:=3.0
-PKG_RELEASE:=1
+PKG_VERSION:=3.5
+PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/ser2net
-PKG_MD5SUM:=bf8af8cfacd35828a9778d69972f6345
+PKG_HASH:=ba9e1d60a89fd7ed075553b4a2074352902203f7fbd9b65b15048c05f0e3f3be
 
 PKG_LICENSE:=GPL-2.0+
 PKG_LICENSE_FILES:=COPYING
@@ -29,6 +29,7 @@ define Package/ser2net
   CATEGORY:=Network
   TITLE:=Serial to Network Proxy
   URL:=http://sourceforge.net/projects/ser2net/
+  DEPENDS:=+USE_UCLIBC:libpthread +USE_UCLIBC:librt
 endef
 
 define Package/ser2net/description
@@ -42,9 +43,16 @@ endef
 
 define Package/ser2net/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ser2net $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/ser2net $(1)/usr/sbin/
+
 	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_CONF) $(PKG_BUILD_DIR)/ser2net.conf $(1)/etc/
+	$(INSTALL_CONF) ./files/ser2net.conf $(1)/etc/
+
+	$(INSTALL_DIR) $(1)/etc/config
+	$(INSTALL_CONF) ./files/ser2net.config $(1)/etc/config/ser2net
+
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/ser2net.init $(1)/etc/init.d/ser2net
 endef
 
 $(eval $(call BuildPackage,ser2net))

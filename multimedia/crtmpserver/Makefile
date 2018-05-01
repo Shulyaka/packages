@@ -10,13 +10,14 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=crtmpserver
 PKG_REV:=b6fdcdb953d1e99c48a0c37a8c80f2cad2db443b
 PKG_VERSION:=2012-07-18+git-$(PKG_REV)
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 PKG_BUILD_PARALLEL:=2
 PKG_MAINTAINER:=Thomas Heil <heil@terminal-consulting.de>
 PKG_LICENSE:=GPL-3.0
 
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_MIRROR_HASH:=8d887996b6b8cb465ec59f3f713fca46161cbb804cacd2b5405f836083fb58ba
 PKG_SOURCE_URL:=https://github.com/j0sh/crtmpserver.git
 PKG_SOURCE_SUBDIR:=crtmpserver-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)

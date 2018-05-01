@@ -8,14 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ocserv
-PKG_VERSION:=0.11.5
-PKG_RELEASE:=2
+PKG_VERSION:=0.11.11
+PKG_RELEASE:=1
 PKG_USE_MIPS16:=0
 
 PKG_BUILD_DIR :=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=ftp://ftp.infradead.org/pub/ocserv/
-PKG_MD5SUM:=fbda999ce0b528d001bb46b3db6f5d49
+PKG_HASH:=4d7b663f10d840b6dfc216e13f287defc28195394fa9f80fad578186105fabf8
 
 PKG_LICENSE:=GPLv2+
 PKG_LICENSE_FILES:=COPYING
@@ -44,12 +44,12 @@ define Package/ocserv
 endef
 
 define Package/ocserv/description
- OpenConnect server (ocserv) is an SSL VPN server. Its purpose is to be 
+ OpenConnect server (ocserv) is an SSL VPN server. Its purpose is to be
  a secure, small, fast and configurable VPN server. It implements the
  OpenConnect SSL VPN protocol, and has also (currently experimental)
  compatibility with clients using the AnyConnect SSL VPN protocol. The
  OpenConnect VPN protocol uses the standard IETF security protocols such
- as TLS 1.2, and Datagram TLS to provide the secure VPN service. 
+ as TLS 1.2, and Datagram TLS to provide the secure VPN service.
 endef
 
 EXTRA_CPPFLAGS+=-I$(STAGING_DIR)/usr/include/readline/
@@ -60,8 +60,10 @@ CONFIGURE_ARGS+= \
 	--enable-local-libopts \
 	--with-libreadline-prefix="$(STAGING_DIR)/" \
 	--without-libnl \
+	--without-lz4 \
 	--without-gssapi \
 	--with-libcrypt-prefix="$(STAGING_DIR)/" \
+	--with-libev-prefix="$(STAGING_DIR)/" \
 	--without-lz4 \
 	--with-local-talloc \
 

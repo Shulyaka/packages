@@ -1,14 +1,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=https_dns_proxy
-PKG_VERSION:=2016-09-04
+PKG_VERSION:=2018-01-28
 PKG_RELEASE=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_MIRROR_HASH:=627f468230a02d8c36915978cc4dce9f1458590aa30e2df723d59cb860acb192
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/aarond10/https_dns_proxy/
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_VERSION:=9e617b76bfd97adfff23e0e8bf2862ce4aee8682
+PKG_SOURCE_VERSION:=843b768f0cd3aa6fa5aed4fa992776657bc18d14
 PKG_MAINTAINER:=Aaron Drew <aarond10@gmail.com>
 PKG_LICENSE:=MIT
 
@@ -19,7 +20,7 @@ define Package/https_dns_proxy
   SECTION:=net
   CATEGORY:=Network
   TITLE:=DNS over HTTPS proxy server
-  DEPENDS:=+libcares +libcurl +libev
+  DEPENDS:=+libcares +libcurl +libev +ca-bundle
 endef
 
 define Package/https_dns_proxy/install

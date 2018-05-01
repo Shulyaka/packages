@@ -8,12 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=acme
-PKG_SOURCE_VERSION:=1e6b68f5d187fa3d64c889d04a77ee1c79726282
-PKG_VERSION:=1.1
-PKG_RELEASE:=1
+PKG_SOURCE_VERSION:=db3264ab8c8ee1aee1a84407702db4375f67765b
+PKG_VERSION:=1.6
+PKG_RELEASE:=4
 PKG_LICENSE:=GPLv3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE).tar.xz
+PKG_MIRROR_HASH:=a881b86fef2b754739fc0024efdf061312fecaf613502434770b18191bda741d
 PKG_SOURCE_URL:=git://github.com/Neilpang/acme.sh.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)
@@ -25,7 +26,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/acme
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+curl +ca-certificates +uhttpd-mod-tls +openssl-util
+  DEPENDS:=+curl +ca-bundle +openssl-util +netcat
   TITLE:=ACME (Letsencrypt) client
   PKGARCH:=all
   MAINTAINER:=Toke Høiland-Jørgensen <toke@toke.dk>
@@ -47,6 +48,7 @@ define Build/Compile
 endef
 
 define Package/acme/install
+	$(INSTALL_DIR) $(1)/etc/acme
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_CONF) ./files/acme.config $(1)/etc/config/acme
 	$(INSTALL_DIR) $(1)/etc/init.d
@@ -90,6 +92,7 @@ uci -q get ucitrack.@acme[0] > /dev/null && {
   uci delete ucitrack.@acme[0]
   uci commit
 }
+exit 0
 endef
 
 
