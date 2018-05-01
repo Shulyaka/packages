@@ -21,8 +21,6 @@ PKG_SOURCE_URL:=https://github.com/PurpleI2P/i2pd.git
 PKG_SOURCE_VERSION:=$(PKG_VERSION)
 PKG_LICENSE:=BSD-3-clause
 
-PKG_USE_MIPS16:=0 
-
 include $(INCLUDE_DIR)/package.mk
 
 define Package/i2pd
