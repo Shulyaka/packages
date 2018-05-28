@@ -30,7 +30,7 @@ start_service() {
 	chown $USER:adm $PIDFILE
 
 	procd_open_instance
-	procd_set_param command $PROG --service --conf=/etc/i2pd/i2pd.conf --pidfile $PIDFILE
+	procd_set_param command $PROG --service --conf=/etc/i2pd/i2pd.conf --datadir "$DATADIR" --pidfile "$PIDFILE"
 	## Don't know about i2pd user's HOME
 	procd_set_param env HOME=$DATADIR
 	procd_set_param limits nofile=4096

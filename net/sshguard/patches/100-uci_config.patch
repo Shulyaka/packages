@@ -1,0 +1,31 @@
+--- a/src/sshguard.in	2017-08-20 09:05:07.000000000 +0300
++++ b/src/sshguard.in	2018-05-15 00:30:30.350950990 +0300
+@@ -27,15 +27,25 @@
+ EOF
+ }
+ 
+-# Source configuration file
+-config="@sysconfdir@/sshguard.conf"
++# Read configuration file
++config="/etc/config/sshguard"
+ if [ ! -r $config ]; then
+     err "Could not read '$config'"
+     err "Please configure SSHGuard."
+     exit 78
+ fi
+ 
+-. $config
++BACKEND="`uci -q get sshguard.settings.backend`"
++FILES="`uci -q get sshguard.settings.files`"
++LOGREADER="`uci -q get sshguard.settings.logreader`"
++THRESHOLD="`uci -q get sshguard.settings.threshold`"
++BLOCK_TIME="`uci -q get sshguard.settings.block_time`"
++DETECTION_TIME="`uci -q get sshguard.settings.detection_time`"
++IPV6_SUBNET="`uci -q get sshguard.settings.ipv6_subnet`"
++IPV4_SUBNET="`uci -q get sshguard.settings.ipv4_subnet`"
++PID_FILE="`uci -q get sshguard.settings.pid_file`"
++BLACKLIST_FILE="`uci -q get sshguard.settings.blacklist_file`"
++WHITELIST_FILE="`uci -q get sshguard.settings.whitelist_file`"
+ 
+ # Runtime arguments override configuration options
+ while getopts "b:l:p:s:a:w:i:hv" opt; do

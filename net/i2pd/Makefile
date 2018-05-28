@@ -30,7 +30,7 @@ define Package/i2pd
 	         +boost-program_options +boost-date_time +libatomic +zlib
 	TITLE:=full-featured C++ implementation of I2P client
 	URL:=https://github.com/PurpleI2P/i2pd
-	USERID:=i2pd:i2pd
+	USERID:=i2pd=53:i2pd=53
 	MAINTAINER:=David Yang <mmyangfl@gmail.com>
 endef
 
@@ -60,7 +60,7 @@ define Package/i2pd/install
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/contrib/i2pd.conf $(1)/etc/i2pd
 	$(SED) ' \
 		s/127.0.0.1/192.168.1.1/g; \
-		s/datadir = \/var\/lib/datadir = \/etc/ \
+		s/# datadir = \/var\/lib/datadir = \/etc/ \
 	' $(1)/etc/i2pd/i2pd.conf
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/contrib/subscriptions.txt $(1)/etc/i2pd
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/contrib/tunnels.conf $(1)/etc/i2pd
